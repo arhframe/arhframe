@@ -67,6 +67,7 @@ class File
 	}
 	public function getContent(){
 		if($this->isUrl){
+
 			return $this->curlGetContent($this->absolute());
 		}
 		if(!$this->isFile()){
@@ -136,10 +137,11 @@ class File
 	private function curlGetContent($url)
 	{
 	    $ch = curl_init();
-		$timeout = 5;
+		$timeout = 20;
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$data = curl_exec($ch);
 		curl_close($ch);
 		return $data;

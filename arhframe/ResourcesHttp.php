@@ -68,11 +68,15 @@ class ResourcesHttp
             throw new ArhframeException("'". $this->resource ."' is not resource from web.");
         }
         $folder = $this->getFolderFromUrl();
-        $file = new File($folder->absolute() .'/'. $pathinfo['basename']);
+        $file = new File(preg_replace('/[^\da-z\/\.]/i', '', $folder->absolute() .'/'. $pathinfo['basename']));
+
         if($file->isFile() && $file->getTime() < $file->getTime() + $this->expireTime){
             return $file->absolute();
         }
+
         $fileResource = new File($this->resource);
+        $fileResource->setExtension($this->extension);
+
         $file->setExtension($this->extension);
         $file->setContent($fileResource->getContent());
         return $file->absolute();
@@ -97,7 +101,7 @@ class ResourcesHttp
             return;
         }
 
-        return preg_replace(ResourcesHttp::$pattern, '', $this->resource);
+        return preg_replace('/[^\da-z\/\.]/i', '', preg_replace(ResourcesHttp::$pattern, '', $this->resource));
     }
     public function getTypeFromHeader(){
         $headers = get_headers($this->resource ,1);

@@ -5,9 +5,6 @@ root:
             _type: array
             _required: true
             _children:
-                servername:
-                    _required: true
-                    _type: text
                 pagerouter:
                     _required: true
                     _type: text

@@ -1,10 +1,6 @@
 <?php
 import('arhframe.Config');
-$config = Config::getInstance();
-$servername = null;
-if (!empty($config->config->servername)) {
-    $servername = '/'. $config->config->servername;
-}
+$servername = dirname($_SERVER['SCRIPT_NAME']);
 if ($_SERVER['SERVER_PORT']==80) {
 
     define("SERVERNAME", 'http://'.$_SERVER['SERVER_NAME']. $servername);

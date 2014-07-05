@@ -1,0 +1,48 @@
+arhframe.DoctrineManager:
+    class: arhframe.DoctrineManager
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager
+arhframe.languagemanager:
+    class: arhframe.LanguageManager
+    property:
+        request:
+            ref: arhframe.request
+arhframe.secure:
+    class: arhframe.secure.Secure
+    property:
+        request:
+            ref: arhframe.request
+arhframe.request:
+    class: arhframe.Request
+arhframe.FactoryRenderer:
+    class: arhframe.renderer.FactoryRenderer
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager
+arhframe.HelperManager:
+    class: arhframe.helper.HelperManager
+arhframe.debugBarManager:
+    class: arhframe.debug.DebugBarManager
+arhframe.simpleDbManager:
+    class: arhframe.SimpleDbManager
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager
+arhframe.controller:
+    type: abstract
+    property:
+        languageManager: 
+            ref: arhframe.languagemanager
+        secure:
+            ref: arhframe.secure
+        request:
+            ref: arhframe.request
+        renderer:
+            ref: arhframe.FactoryRenderer
+        doctrineManager:
+            ref: arhframe.DoctrineManager
+        helperManager:
+            ref: arhframe.HelperManager
+        simpleDbManager:
+            ref: arhframe.simpleDbManager
