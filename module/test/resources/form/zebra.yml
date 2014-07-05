@@ -1,0 +1,112 @@
+myButton:
+    type: "button"
+    displayName: "Click me!"
+    attributes:
+        alt: "Click this button"
+myCaptcha:
+    type: "captcha"
+    note: "it's my captcha"
+    displayName: "captcha:"
+    storage: "captchaCode"
+    rules:
+        captcha:
+            error: errorCaptcha
+            message: "not entered correctly"
+myCheckbox:
+    type: "checkboxes"
+    note: "it's my checkbox"
+    displayName: "checkboxes"
+    multiple: false
+    values:
+        v1: "Value 1"
+        v2: "Value 2"
+        v3: "Value 3"
+        v4: "Value 4"
+    selected: v1
+    attributes:
+        disabled: "disabled"
+        readonly: "readonly"
+        style: "color:red;"
+myDate:
+    type: "date"
+    note: "it's my date"
+    displayName: "date picker"
+    format: "Y-m-d"
+myFile:
+    type: "file"
+    note: "it's my file"
+    displayName: "my file"
+    rules:
+        upload:
+            uploadpath: tmp
+            fileName: name
+            errorBlock: error
+            errorMessage: file could not be load
+myHidden:
+    type: "hidden"
+    value: "Secret value"
+myImage:
+    type: "image"
+    note: "it's my image"
+    displayName: "my image"
+    image: "atos.jpg"
+myPassword:
+    type: "password"
+    displayName: "my password"
+    default: ""
+    note: "it's my password"
+    attributes:
+        data-prefix: "img:favicon.gif"
+myRadio:
+    type: "radios"
+    note: "it's my radio"
+    displayName: "my radios"
+    values:
+        v1: "Value 1"
+        v2: "Value 2"
+        v3: "Value 3"
+        v4: "Value 4"
+    selected: v1
+myReset:
+    type: "reset"
+    displayName: "Click for reset!"
+mySelect:
+    type: "select"
+    note: "it's my select"
+    displayName: "my select"
+    multiple: false
+    values:
+        v1: "Value 1"
+        v2: "Value 2"
+        v3: "Value 3"
+        v4: "Value 4"
+    selected: v1
+myText:
+    type: "text"
+    displayName: "my text"
+    rules:
+        required:
+            error: isRequired
+            message: ""
+myTextarea:
+    type: "textarea"
+    displayName: "my text"
+    default: "nothing"
+    attributes:
+        rows: 10
+        inside: true
+    rules:
+        length:
+            min: 6
+            max: 10
+            error: errorText
+            message: "must be between 6 and 10"
+myTime:
+    type: "time"
+    default: "h:i"
+    displayName: "my time"
+    attributes:
+        format: "hm"
+mySubmit:
+    type: "submit"
+    displayName: "Click for submit!"

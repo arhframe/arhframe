@@ -1,0 +1,13 @@
+js: 
+    - "js/foundation/*"
+    "js/vendor/custom.modernizr.js":
+        compile: false
+    "js/vendor/zepto.js":
+        compile: false
+autocompilejs: false
+autocompilecss: true
+scss:
+    - "scss/normalize.scss"
+    - "scss/foundation.scss"
+needle:
+    - jquery.js

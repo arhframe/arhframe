@@ -1,0 +1,35 @@
+root:
+    _type: array
+    _children:
+        server:
+            _type: array
+            _required: true
+            _children:
+                type:
+                    _required: true
+                    _type: enum
+                    _values:
+                        - ftp
+                        - sftp
+                host:
+                    _required: false
+                    _type: text
+                user:
+                    _required: false
+                    _type: text
+                port:
+                    _required: false
+                    _type: number
+                password:
+                    _type: text
+                path:
+                    _required: true
+                    _type: text
+        ignore:
+            _required: false
+            _type: array
+            _ignore_extra_keys: true
+            _children:
+                emptyvalue:
+                    _required: false
+                    _type: text

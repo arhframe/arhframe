@@ -1,0 +1,23 @@
+default:
+  pattern: "/"
+  controller: "arthurh"
+  action: "index"
+  static: true
+realisation:
+  pattern: "/realisation"
+  controller: "arthurh"
+  action: "realisation"
+  static: true
+contact:
+  pattern: "/contact"
+  controller: "arthurh"
+  action: "contact"
+contactpost:
+  pattern: "/contact"
+  controller: "arthurh"
+  action: "contactPost"
+  method: "post"
+jo:
+  pattern: "/jojos-{test}-{joik}"
+  controller: "arthurh"
+  action: "contact"

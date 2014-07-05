@@ -1,0 +1,15 @@
+html
+  head
+    title  My Webpage
+  body
+    h1  My Webpage jade
+    :php
+      |  echo $a_variable;
+      |  echo 'oui';
+    :import
+      |  test.jade
+      |  test.jade
+    br
+    br
+    :php
+      |  echo getResourceHtml('atos/jojo/atos.jpg')->resize(50)

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html class="fuelux">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {{ frameworkFrontend('fuelux') }}
+        {{ getResourceHtml('http://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css') }}
+        {{ getResourceHtml('http://code.jquery.com/ui/1.10.3/jquery-ui.min.js') }}
+        {{ getNeedleHtml('zebra_form.css') }}
+        {{ getResourceHtml('style.css') }}
+        {{ getResourceHtml('http://mottie.github.io/Keyboard/css/keyboard.css') }}
+        {{ getResourceHtml('http://mottie.github.io/Keyboard/js/jquery.keyboard.js') }}
+        {{ getResourceHtml('http://mottie.github.io/Keyboard/js/jquery.mousewheel.js') }}
+        {{ getResourceHtml('http://mottie.github.io/Keyboard/js/jquery.keyboard.extension-typing.js') }}
+        {{ getResourceHtml('http://mottie.github.io/Keyboard/js/jquery.keyboard.extension-autocomplete.js') }}
+        {{ getResourceHtml('https://raw.github.com/yuku-t/jquery-textcomplete/gh-pages/jquery.textcomplete.min.js') }}
+        {{ getResourceHtml('http://yuku-t.com/jquery-textcomplete/media/stylesheets/shCoreDefault.css') }}
+        {{ getResourceHtml('http://yuku-t.com/jquery-textcomplete/media/javascripts/emoji.js') }}
+        <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UmTools</title>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">UmTools</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12" style="background: #eee;">
+          <div id="container">  
+              <div class="areaWriting">
+                <textarea id="write" aria-haspopup="true" role="textbox" style="width: 700px; height: 300px;"></textarea>  
+              </div>
+          </div>  
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+      <script>
+      $(function(){
+        var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure",
+         "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript",
+ "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme" ];
+
+        $('#write')
+         .keyboard({ layout: 'qwerty' })
+         .autocomplete({
+          source: availableTags
+         })
+         .addAutocomplete()
+         .addTyping();
+    
+        
+      });
+      </script>
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+
+    </div>
+    </body>
+</html>

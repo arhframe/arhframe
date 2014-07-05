@@ -1,0 +1,46 @@
+fs0:
+  type: fieldset
+  legend: inputText example
+  submit: 1
+name:
+  type: inputText
+  displayname: Enter your name
+  postfix: ' and this is how a <code>postfix</code> looks like!'
+  validation:
+    -
+      type: required
+acceptrules:
+  type: inputCheckbox
+  displayname: 'Do you accept<br>site rules?'
+  prefix: "...don't you?! (it's a <code>prefix</code>) "
+  help: 'You have to accept the site rules to continue'
+  validation:
+    -
+      type: required
+drink[]:
+  type: select
+  displayname: 'Drink <br>(columns swapped for this row using <code>rowlayout</code>)'
+  help: Select some drink!
+  rowlayout: '<tr %errorstyle%><td width="120" align="right">%prefix%%element%%postfix%%errordiv%</td><td width="15">%erroricon%</td><td align="left"><label for="%id%">%displayname%</label></td></tr>'
+  values:
+    - cafe
+    - hot chocolate
+    - milk
+    - yoghurt
+  html: multiple="multiple" size="5"
+  validation:
+    -
+      type: required
+think:
+  type: inputRadio
+  displayname: 'What do you think?<br />(the tabular layout for the radio buttons is done using <code>layout</code> and <code>itemlayout</code>)'
+  help: Please tell us what you think!
+  values:
+    - no
+    - yes
+    - maybe
+  layout: '<table>%s</table>'
+  itemlayout: '<tr><td>%radio%</td><td>%label%</td></tr>'
+  validation:
+    -
+      type: required

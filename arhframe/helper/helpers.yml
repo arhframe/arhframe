@@ -1,0 +1,15 @@
+mail:
+    import: arhframe.helper.mail.PHPMailer.**
+    class: \PHPMailer
+webmail:
+    import: arhframe.helper.mail.Webmail
+    class: \Webmail
+ftp:
+    import: arhframe.helper.ftp.SFTP
+    class: \SFTP
+html2pdf:
+    import: vendor.ensepar.html2pdf.HTML2PDF
+    class: \HTML2PDF
+htmlmanipulator:
+    import: ""
+    class: \Wa72\HtmlPageDom\HtmlPage

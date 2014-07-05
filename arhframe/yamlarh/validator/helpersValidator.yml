@@ -1,0 +1,22 @@
+root:
+    _type: array
+    _children:
+        helpers:
+            _type: prototype
+            _prototype:
+                _type: array
+                _children:
+                    import:
+                        _required: true
+                        _type: text
+                    class:
+                        _required: true
+                        _type: text
+        @import:
+                _required: false
+                _type: array
+                _ignore_extra_keys: true
+                _children:
+                    emptyvalue:
+                        _required: false
+                        _type: text

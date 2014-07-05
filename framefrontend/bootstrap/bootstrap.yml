@@ -1,0 +1,11 @@
+js: 
+    - "js/bootstrap-tooltip.js"
+    - "js/*"
+autocompilejs: false
+autocompilecss: false
+less:
+    - "less/bootstrap.less"
+    "less/responsive.less":
+        responsive: true
+needle:
+    - jquery.js

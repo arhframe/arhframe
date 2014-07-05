@@ -1,0 +1,15 @@
+jade:
+    - jade
+    - jd
+php:
+    - php
+plates:
+    - plates
+    - plt
+    - tplt
+    - tpl
+twig:
+    - twig
+mustache:
+    - mustache
+    - stache

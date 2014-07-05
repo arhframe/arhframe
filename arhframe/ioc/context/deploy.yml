@@ -1,0 +1,21 @@
+arhframe.deploy.command:
+    class: arhframe.deployer.steps.CommandStep
+arhframe.deploy.file:
+    class: arhframe.deployer.steps.FileStep
+arhframe.deploy.folder:
+    class: arhframe.deployer.steps.FolderStep
+arhframe.deploy.ssh:
+    class: arhframe.deployer.steps.SshStep
+arhframe.deploy.yaml:
+    class: arhframe.deployer.steps.YamlStep
+arhframe.deployApi:
+    class: arhframe.deployer.DeployerApi
+    property:
+        steppers:
+            ref:
+                yaml: arhframe.deploy.yaml
+                yml: arhframe.deploy.yaml
+                command: arhframe.deploy.command
+                file: arhframe.deploy.file
+                folder: arhframe.deploy.folder
+                ssh: arhframe.deploy.ssh

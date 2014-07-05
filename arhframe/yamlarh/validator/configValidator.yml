@@ -1,0 +1,247 @@
+root:
+    _type: array
+    _children:
+        config:
+            _type: array
+            _required: true
+            _children:
+                servername:
+                    _required: true
+                    _type: text
+                pagerouter:
+                    _required: true
+                    _type: text
+                defaultLang:
+                    _required: true
+                    _type: text
+                keySessionLang:
+                    _required: true
+                    _type: text
+                charset:
+                    _type: text
+                debug:
+                    _required: true
+                    _type: boolean
+                debug_folder_for_analysis:
+                    _required: false
+                    _type: text
+                devmode:
+                    _required: true
+                    _type: boolean
+                compileauto:
+                    _required: true
+                    _type: boolean
+                responsive:
+                    _required: true
+                    _type: boolean
+        logger:
+            _type: array
+            _required: true
+            _children:
+                path:
+                    _required: true
+                    _type: text
+                level:
+                    _required: true
+                    _type: enum
+                    _values:
+                        - DEBUG
+                        - INFO
+                        - NOTICE
+                        - WARNING
+                        - ERROR
+                        - CRITICAL
+                        - ALERT
+                        - EMERGENCY
+                maxretention:
+                    _required: true
+                    _type: text
+        debugguer:
+            _type: array
+            _required: true
+            _children:
+                handler:
+                    _required: false
+                    _type: enum
+                    _values:
+                        - whoops
+                        - php
+                title:
+                    _required: true
+                    _type: text
+                editor:
+                    _required: false
+                    _type: enum
+                    _values:
+                        - sublime
+                        - emacs
+                        - textmate
+                        - macvim
+                        - xdebug
+        renderer:
+            _type: array
+            _ignore_extra_keys: true
+            _required: true
+            _children:
+                emptyvalue:
+                    _required: false
+                    _type: text
+        bdd:
+            _required: false
+            _type: prototype
+            _prototype:
+                _type: array
+                _children:
+                    driver:
+                        _required: false
+                        _type: enum
+                        _values:
+                            - pdo_mysql
+                            - pdo_sqlite
+                            - pdo_pgsql
+                            - pdo_oci
+                            - pdo_sqlsrv
+                            - oci8
+                    host:
+                        _required: false
+                        _type: text
+                    port:
+                        _required: false
+                        _type: number
+                    username:
+                        _required: false
+                        _type: text
+                    password:
+                        _type: text
+                    dbname:
+                        _required: false
+                        _type: text
+                    path:
+                        _required: false
+                        _type: text
+        cache:
+            _type: array
+            _required: true
+            _children:
+                type:
+                    _required: false
+                    _type: enum
+                    _values:
+                        - ""
+                        - memcache
+                        - memcached
+                        - xcache
+                        - file
+                        - apc
+                        - false
+                folder:
+                    _required: false
+                    _type: text
+                lifetime:
+                    _required: false
+                    _type: number
+                server:
+                    _required: false
+                    _type: prototype
+                    _prototype:
+                        _type: array
+                        _children:
+                            port:
+                                _type: number
+                            cost:
+                                _type: number
+                            persistent:
+                                _required: false
+                                _type: boolean
+        httpcache:
+            _type: array
+            _required: false
+            _children:
+                no-cache:
+                    _required: false
+                    _type: boolean
+                no-store:
+                    _required: false
+                    _type: boolean
+                no-transform:
+                    _required: false
+                    _type: boolean
+                must-revalidate:
+                    _required: false
+                    _type: boolean
+                proxy-revalidate:
+                    _required: false
+                    _type: boolean
+                only-if-cached:
+                    _required: false
+                    _type: boolean
+                visibility:
+                    _required: false
+                    _type: enum
+                    _values:
+                        - ""
+                        - public
+                        - private
+                max-age:
+                    _required: false
+                    _type: text
+                max-stale:
+                    _required: false
+                    _type: text
+                proxy-max-age:
+                    _required: false
+                    _type: text
+                min-fresh:
+                    _required: false
+                    _type: text
+                expiration:
+                    _required: false
+                    _type: text
+            
+        secure:
+            _type: array
+            _required: true
+            _children:
+                passphrase:
+                    _required: true
+                    _type: text
+                issueidentifier:
+                    _required: false
+                    _type: boolean
+                tokenKey:
+                    _required: true
+                    _type: text
+                securitythreshold:
+                    _required: true
+                    _type: number
+                restrictions:
+                    _type: array
+                    _ignore_extra_keys: true
+                    _children:
+                        emptyvalue:
+                            _required: false
+                            _type: text
+                exceptions:
+                    _type: array
+                    _ignore_extra_keys: true
+                    _children:
+                        emptyvalue:
+                            _required: false
+                            _type: text
+        assetics:
+            _required: false
+            _type: prototype
+            _prototype:
+                _type: array
+                _children:
+                    installed:
+                        _required: true
+                        _type: boolean
+        @import:
+            _required: false
+            _type: array
+            _ignore_extra_keys: true
+            _children:
+                emptyvalue:
+                    _required: false
+                    _type: text

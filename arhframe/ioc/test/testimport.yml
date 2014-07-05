@@ -1,0 +1,22 @@
+foobean:
+    class: arhframe.ioc.foo
+abstractusebean:
+    type: abstract
+    property:
+        foo:
+            ref: foobean
+        juju:
+            value: testValue
+usebean:
+    class: arhframe.ioc.using
+    extend: abstractusebean
+        #jojo:
+        #    yml: /config/config.yml
+        #jojo:
+        #    propertyfile: /config/test.txt
+        #jojo:
+        #    stream:
+        #        resource: http://www.sk89q.com/2010/04/introduction-to-php-streams/
+        #        context:
+        #            http:
+        #                method: GET

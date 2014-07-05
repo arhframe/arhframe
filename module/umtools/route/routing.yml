@@ -1,0 +1,4 @@
+francky:
+  pattern: "/umtools"
+  controller: "umtools"
+  action: "index"

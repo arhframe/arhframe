@@ -1,0 +1,54 @@
+{
+    "name": "arhframe/arhframe",
+    "description": "Framework php more frontend without command line",
+    "keywords": [
+        "Framework",
+        "frontend"
+    ],
+    "homepage": "https://bitbucket.org/timoun/arhframephp/wiki/Home",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur Halet",
+            "email": "arthurhalet@free.fr",
+            "homepage": "http://arthurh.fr"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "arhframe": "arhframe/"
+        }
+    },
+    "support": {
+        "email": "arthurhalet@free.fr"
+    },
+    "require": {
+		"knplabs/github-api": "*",
+        "monolog/monolog": "*",
+        "ensepar/html2pdf": "*",
+        "devster/ubench": "1.1.*-dev",
+        "pagerfanta/pagerfanta": "*",
+        "coffeescript/coffeescript": "*",
+        "touki/ftp": "*",
+        "phpseclib/phpseclib": "*",
+        "youknowriad/meta-yaml": "dev-master",
+        "filp/whoops": "1.*",
+        "ikimea/browser": "dev-master",
+        "sabberworm/php-css-parser": "5.0.8",
+        "enygma/expose": "2.1",
+        "twig/twig": "1.13.*",
+        "erusev/parsedown": "0.*",
+        "league/plates": "1.0.*",
+        "phpmd/phpmd": "1.4.*",
+        "symfony/yaml": "2.*",
+        "maximebf/debugbar": "1.*",
+        "wa72/htmlpagedom": "1.*",
+        "league/flysystem": "0.2.*",
+        "mustache/mustache": "~2.1",
+        "m6web/firewall": "0.*",
+        "base-reality/php-to-javascript": "0.1.16",
+        "maximebf/consolekit": "1.0.3"
+    },
+    "minimum-stability": "stable"
+}

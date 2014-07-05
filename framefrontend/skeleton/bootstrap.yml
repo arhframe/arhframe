@@ -1,0 +1,9 @@
+autocompilejs: false
+autocompilecss: false
+css:
+    - "css/base.css"
+    - "css/skeleton.css"
+    - "css/layout.css"
+needle:
+    "http://html5shim.googlecode.com/svn/trunk/html5.js":
+        conditional: "<!--[if lt IE 9]>%s<![endif]-->"

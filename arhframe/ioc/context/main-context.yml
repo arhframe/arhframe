@@ -1,0 +1,33 @@
+arhframe.languagemanager:
+    class: arhframe.LanguageManager
+    property:
+        request:
+            ref: arhframe.request
+arhframe.HelperManager:
+    class: arhframe.helper.HelperManager
+    property:
+        helperYaml:
+            yaml: helper
+arhframe.controller:
+    type: abstract
+    property:
+        languageManager:
+            ref: arhframe.languagemanager
+        secure:
+            ref: arhframe.secure
+        request:
+            ref: arhframe.request
+        renderer:
+            ref: arhframe.FactoryRenderer
+        doctrineManager:
+            ref: arhframe.DoctrineManager
+        helperManager:
+            ref: arhframe.HelperManager
+        simpleDbManager:
+            ref: arhframe.simpleDbManager
+@import:
+  - database.yml
+  - debug.yml
+  - renderer.yml
+  - request.yml
+  - deploy.yml

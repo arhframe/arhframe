@@ -1,0 +1,15 @@
+root:
+    _type: prototype
+    _prototype:
+        _type: array
+        _children:
+            validation:
+                _type: boolean
+            validator:
+                _type: text
+            folder:
+                _required: true
+                _type: text
+            filename:
+                _required: true
+                _type: text

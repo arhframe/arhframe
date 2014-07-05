@@ -1,0 +1,11 @@
+arhframe.debugBarManager:
+    class: arhframe.debug.DebugBarManager
+    property:
+        htmlProxy:
+            ref: arhframe.htmlProxy
+arhframe.varDump:
+    class: arhframe.debug.VarDump
+    #namespace: arhframe
+    property:
+        debugBar:
+            ref: arhframe.debugBarManager

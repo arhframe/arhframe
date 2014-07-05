@@ -1,0 +1,18 @@
+defaultpost:
+  pattern: "/"
+  controller: "test"
+  action: "indexPost"
+  method: "post"
+defaultiphone:
+  pattern: "/"
+  controller: "test"
+  action: "indexIPhone"
+  type: "Mobile"
+title:
+  pattern: "/default-{title}-{slug}"
+  controller: "test"
+  action: "index"
+default:
+  pattern: "/"
+  controller: "test"
+  action: "index"

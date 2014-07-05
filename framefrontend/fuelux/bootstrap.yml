@@ -1,0 +1,14 @@
+autocompilejs: false
+autocompilecss: false
+less:
+    0: "less/bootstrap.less"
+    "less/responsive.less":
+        responsive: true
+    1: "less/fuelux.less"
+    "less/fuelux-responsive.less":
+        responsive: true
+needle:
+    0: jquery.js
+    "http://html5shim.googlecode.com/svn/trunk/html5.js":
+        conditional: "<!--[if lt IE 9]>%s<![endif]-->"
+    1: "http://fuelcdn.com/fuelux-imh/2.2/loader.min.js"

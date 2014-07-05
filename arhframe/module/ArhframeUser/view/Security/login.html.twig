@@ -1,0 +1,21 @@
+{% extends "@af_ArhframeUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error|translate() }}</div>
+{% endif %}
+
+<form action="" method="post">
+
+    <label for="username">{{ 'security.login.username'|translate() }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+    <label for="password">{{ 'security.login.password'|translate() }}</label>
+    <input type="password" id="password" name="_password" required="required" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|translate() }}</label>
+
+    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|translate() }}" />
+</form>
+{% endblock fos_user_content %}

@@ -1,0 +1,11 @@
+arhframe.FactoryRenderer:
+    class: arhframe.renderer.FactoryRenderer
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager
+        htmlProxy:
+            ref: arhframe.htmlProxy
+        renderers:
+            yaml: renderers
+        languageManager:
+            ref: arhframe.languagemanager

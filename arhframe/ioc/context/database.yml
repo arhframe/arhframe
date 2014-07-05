@@ -1,0 +1,10 @@
+arhframe.DoctrineManager:
+    class: arhframe.DoctrineManager
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager
+arhframe.simpleDbManager:
+    class: arhframe.SimpleDbManager
+    property:
+        debugBarManager:
+            ref: arhframe.debugBarManager

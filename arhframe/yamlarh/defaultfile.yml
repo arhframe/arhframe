@@ -1,0 +1,21 @@
+config:
+    validation: true
+    #validator: configValidator.yml
+    folder: /config
+    filename: config.yml
+helper:
+    validation: true
+    folder: /config
+    filename: helpers.yml
+deploy:
+    validation: false
+    folder: /config
+    filename: deploy.yml
+renderers:
+    validation: false
+    folder: /arhframe/renderer
+    filename: renderers.yml
+securityuser:
+    validation: false
+    folder: /config
+    filename: securityuser.yml
