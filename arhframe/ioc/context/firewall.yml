@@ -1,0 +1,31 @@
+arhframe.encoder:
+    class: arhframe.secure.Encoder
+arhframe.httpBasic:
+    class: arhframe.secure.authentification.HttpBasicAuthentifier
+    property:
+        request:
+            ref: arhframe.request
+arhframe.httpDigest:
+    class: arhframe.secure.authentification.HttpDigestAuthentifier
+    property:
+        request:
+            ref: arhframe.request
+arhframe.memoryProvider:
+    class: arhframe.providers.user.MemoryUserProvider
+arhframe.firewall:
+    class: arhframe.secure.Firewall
+    property:
+        firewalls:
+            yaml: securityuser
+        request:
+            ref: arhframe.request
+        encoder:
+            ref: arhframe.encoder
+        authentifiers:
+            ref:
+                httpBasic: arhframe.httpBasic
+                httpDigest: arhframe.httpDigest
+        providers:
+            ref:
+                memory: arhframe.memoryProvider
+                memory2: arhframe.memoryProvider

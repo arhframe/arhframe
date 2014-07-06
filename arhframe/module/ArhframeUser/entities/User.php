@@ -1,6 +1,8 @@
 <?php
 namespace ArhframeUser\entities;
+
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  * @Table(name="arhframe_users")
@@ -45,7 +47,7 @@ class User implements \Serializable
     public function __construct()
     {
         $this->isActive = true;
-        $this->roles = new ArrayCollection();
+        $this->roles = array();
     }
 
     /**
@@ -68,15 +70,16 @@ class User implements \Serializable
 
     public function getRoles()
     {
-    	return $this->roles->toArray();
+        return $this->roles->toArray();
     }
-    public function addRole(Role $role){
-    	if($this->roles->contains($roles)){
-    		return;
-    	}
-    	$this->roles->add($role);
-    	$role->addUser($this);
+
+    public function addRole(Role $role)
+    {
+
+        $this->roles[] = $role;
+        $role->addUser($this);
     }
+
     /**
      * @inheritDoc
      */
@@ -102,8 +105,7 @@ class User implements \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->roles
         ));
     }
 
@@ -116,44 +118,70 @@ class User implements \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
+            $this->roles
+            ) = unserialize($serialized);
     }
-	public function setUsername($username) {
-		$this->username = $username;
-		return $this;
-	}
-	public function setPassword($password) {
-		$this->password = $password;
-		return $this;
-	}
-	public function getEmail() {
-		return $this->email;
-	}
-	public function setEmail($email) {
-		$this->email = $email;
-		return $this;
-	}
-	public function getIsActive() {
-		return $this->isActive;
-	}
-	public function setIsActive($isActive) {
-		$this->isActive = $isActive;
-		return $this;
-	}
-	public function setRoles($roles) {
-		$this->roles = $roles;
-		return $this;
-	}
-	public function getId() {
-		return $this->id;
-	}
-	public function setId($id) {
-		$this->id = $id;
-		return $this;
-	}
 
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function hasRole(Role $roleToFind)
+    {
+        foreach ($this->roles as $role) {
+            if ($roleToFind->getName() == $role->getName()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

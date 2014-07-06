@@ -31,3 +31,4 @@ arhframe.controller:
   - renderer.yml
   - request.yml
   - deploy.yml
+  - firewall.yml

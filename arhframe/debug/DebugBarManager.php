@@ -7,12 +7,13 @@ import('arhframe.LoggerManager');
 import('arhframe.debug.VarDump');
 import('arhframe.htmlmanipulator.HtmlProxy');
 /**
-*
-*/
+ *
+ */
 function DebugBar()
 {
     return BeanLoader::getInstance()->getBean('arhframe.debugBarManager');
 }
+
 class DebugBarManager
 {
     private $debugBar;
@@ -20,10 +21,11 @@ class DebugBarManager
     private $timeCollector;
     private $noFormat = false;
     private $htmlProxy;
+
     public function __construct()
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         $this->debugBar = new DebugBar\DebugBar();
         $this->timeCollector = new DebugBar\DataCollector\TimeDataCollector();
@@ -40,38 +42,46 @@ class DebugBarManager
         $this->setFolder();
 
     }
+
     public function info($string)
     {
         $this->debugBar['messages']->info($string);
     }
+
     public function warning($string)
     {
         $this->debugBar['messages']->warning($string);
     }
+
     public function error($string)
     {
         $this->debugBar['messages']->error($string);
     }
+
     public function emergency($string)
     {
         $this->debugBar['messages']->emergency($string);
     }
+
     public function critical($string)
     {
         $this->debugBar['messages']->critical($string);
     }
+
     public function notice($string)
     {
         $this->debugBar['messages']->notice($string);
     }
+
     public function debug($string)
     {
         $this->debugBar['messages']->debug($string);
     }
+
     public function setFolder($folder = null)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         if (empty($folder)) {
             $folder = Config::getInstance()->config->debug_folder_for_analysis;
@@ -80,23 +90,25 @@ class DebugBarManager
         if (empty($folder)) {
             return;
         }
-        $folder = dirname(__FILE__) .'/../..'. $folder;
+        $folder = dirname(__FILE__) . '/../..' . $folder;
         if (!is_dir($folder)) {
-            throw new ArhframeException('Debug folder for analysis "'. $this->cacheConfig['folder'] .'" doesn\'t exist.');
+            throw new ArhframeException('Debug folder for analysis "' . $this->cacheConfig['folder'] . '" doesn\'t exist.');
         }
         $this->debugBar->setStorage(new DebugBar\Storage\FileStorage($folder));
     }
+
     public function addDoctrineCollector($debugStack)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         $this->debugBar->addCollector(new DebugBar\Bridge\DoctrineCollector($debugStack));
     }
+
     public function addMonologCollector($logger)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         try {
             $this->debugBar['monolog']->addLogger($logger);
@@ -104,6 +116,7 @@ class DebugBarManager
             $this->debugBar->addCollector(new DebugBar\Bridge\MonologCollector($logger));
         }
     }
+
     public function formatHtmlForDebugBar()
     {
         if (!Config::getInstance()->config->debug || $this->noFormat) {
@@ -114,9 +127,13 @@ class DebugBarManager
         } catch (DebugBar\DebugBarException $e) {
 
         }
+        if (!empty($_SESSION['afUser'])) {
+            $this->debugBar->addCollector(new UserCollector());
+        }
         $this->htmlProxy->appendHead($this->debugBarRenderer->renderHead());
         $this->htmlProxy->appendBody($this->debugBarRenderer->render());
     }
+
     public function modifySendSystem()
     {
         if ($this->htmlProxy->isNoRewrite()) {
@@ -125,6 +142,7 @@ class DebugBarManager
 
         return;
     }
+
     public function addTwigCollector($env)
     {
         if (!Config::getInstance()->config->debug) {
@@ -135,6 +153,7 @@ class DebugBarManager
 
         return $env;
     }
+
     public function addPdoCollector($pdo)
     {
         if (!Config::getInstance()->config->debug) {
@@ -145,17 +164,19 @@ class DebugBarManager
 
         return $pdo;
     }
+
     public function addConfigCollector($data)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         $this->debugBar->addCollector(new DebugBar\DataCollector\ConfigCollector($data));
     }
+
     public function addTemplateCollector($renderer)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         try {
             $this->debugBar[$renderer->getName()]->addRenderer($renderer);
@@ -163,28 +184,30 @@ class DebugBarManager
             $this->debugBar->addCollector(new SimpleTemplateCollector($renderer, $this->timeCollector));
         }
     }
+
     public function addVarDumpCollector(VarDump $varDump)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
 
         try {
             $this->debugBar['Var dump']->addVarDump($varDump);
         } catch (Exception $e) {
-            try{
+            try {
                 $this->debugBar->addCollector(new VarDumpCollector($varDump));
-            }catch (Exception $p) {
+            } catch (Exception $p) {
                 throw new Exception($e);
-                
+
             }
-            
+
         }
     }
+
     public function addFormCollector($name, $renderTime)
     {
         if (!Config::getInstance()->config->debug) {
-            return ;
+            return;
         }
         try {
             $this->debugBar['Form']->addForm($name, $renderTime);
@@ -195,10 +218,12 @@ class DebugBarManager
         }
         $this->debugBar['Form']->addForm($name, $renderTime);
     }
+
     public function setNoFormat($noFormat)
     {
         $this->noFormat = $noFormat;
     }
+
     public function getDebugBar()
     {
         return $this->$debugBar;

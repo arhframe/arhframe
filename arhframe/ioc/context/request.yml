@@ -7,8 +7,3 @@ arhframe.request:
     class: arhframe.Request
 arhframe.htmlProxy:
     class: arhframe.htmlmanipulator.HtmlProxy
-arhframe.firewall:
-    class: arhframe.secure.Firewall
-    property:
-        firewalls:
-            yaml: securityuser
