@@ -20,6 +20,7 @@ class Firewall
     private $sessionName = 'afUser';
     private $msgNeedLogged = 'You need to be logged.';
     private $msgWrongAuth = 'you can\'t access to this page.';
+    private $isLogout = false;
 
     function __construct()
     {
@@ -61,6 +62,7 @@ class Firewall
         }
 
         $this->authentifier->logOut();
+        $this->isLogout = true;
         $this->request->getSession()->remove($this->sessionName);
 
     }
@@ -128,7 +130,7 @@ class Firewall
             header($_SERVER["SERVER_PROTOCOL"] . " 403 Forbiden");
             exit($this->msgWrongAuth);
         }
-        if (empty($ipControl)) {
+        if (empty($ipControl) || empty($ipControl[0])) {
             return;
         }
         $m6Firewall = new \M6Web\Component\Firewall\Firewall();
@@ -147,7 +149,7 @@ class Firewall
 
         if (!$connAllowed) {
             header($_SERVER["SERVER_PROTOCOL"] . " 403 Forbiden");
-            exit($this->msgWrongAuth . '. Wrong ip:' . $ip);
+            exit($this->msgWrongAuth . '. Wrong ip: ' . $ip);
         }
     }
 
@@ -155,7 +157,7 @@ class Firewall
     {
 
         $this->chooseFirewalls();
-        if ($this->isSessionActive()) {
+        if ($this->isSessionActive() || $this->isLogout || empty($this->choice)) {
             return;
         }
 
@@ -293,5 +295,10 @@ class Firewall
     public function setFirewalls(array $firewalls)
     {
         $this->firewalls = $firewalls['securityuser'];
+    }
+
+    public function getLogout()
+    {
+        return $this->choice['logout'];
     }
 }

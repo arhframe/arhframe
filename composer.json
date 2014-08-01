@@ -24,7 +24,7 @@
         "email": "arthurhalet@free.fr"
     },
     "require": {
-		"knplabs/github-api": "*",
+        "knplabs/github-api": "*",
         "monolog/monolog": "*",
         "ensepar/html2pdf": "*",
         "devster/ubench": "1.1.*-dev",
@@ -38,7 +38,7 @@
         "sabberworm/php-css-parser": "5.0.8",
         "enygma/expose": "2.1",
         "twig/twig": "1.13.*",
-        "erusev/parsedown": "0.*",
+        "erusev/parsedown-extra": "dev-master",
         "league/plates": "1.0.*",
         "phpmd/phpmd": "1.4.*",
         "symfony/yaml": "2.*",
@@ -48,7 +48,8 @@
         "mustache/mustache": "~2.1",
         "m6web/firewall": "0.*",
         "base-reality/php-to-javascript": "0.1.16",
-        "maximebf/consolekit": "1.0.3"
+        "maximebf/consolekit": "1.0.3",
+        "sabre/dav": "~2.0.3"
     },
     "minimum-stability": "stable"
 }

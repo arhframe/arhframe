@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {{ frameworkFrontend('fuelux') }}
+
+
+    <title>BlogmdAdmin</title>
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+</head>
+<body>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="{{ getRoute('listarticle') }}">BlogmdAdmin</a>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="{{ getRoute('addarticle') }}">Add article</a></li>
+                    <li><a href="{{ getRoute('addimageview') }}">Upload image</a></li>
+                    <li><a href="{{ getRoute('listArticle') }}">Blog</a></li>
+                    <li><a href="{{ logoutPath() }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    {% block body %}{% endblock %}
+    <!--/row-->
+</div>
+
+<hr>
+
+<footer>
+    <p>&copy; blog md module for arhframe</p>
+</footer>
+</body>
+</html>

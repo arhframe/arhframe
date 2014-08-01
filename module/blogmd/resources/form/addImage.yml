@@ -1,0 +1,12 @@
+addImageMd:
+    type: "file"
+    displayName: "Add an image"
+    rules:
+        upload:
+            uploadpath: ../image/md
+            filename: random
+            errorBlock: error
+            errorMessage: file could not be load
+submitImage:
+    type: "submit"
+    displayName: "Upload"

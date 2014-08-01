@@ -1,0 +1,8 @@
+updateMd:
+    type: "hidden"
+    value: 1
+@include:
+    - /module/blogmd/resources/form/addArticle.yml
+mySubmit:
+    type: "submit"
+    displayName: "Update article"

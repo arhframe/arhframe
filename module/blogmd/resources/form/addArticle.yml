@@ -1,0 +1,39 @@
+title:
+    type: "text"
+    displayName: "Title"
+    default: %TITLE_ARTICLE%
+    rules:
+        required:
+            - error
+            - "Title is required"
+logo:
+    type: "text"
+    displayName: "Image header (must be an url)"
+    default: %LOGO_ARTICLE%
+    rules:
+        required:
+            - error
+            - "Image header is required"
+tags:
+    type: "text"
+    default: %TAGS_ARTICLE%
+    displayName: "Tags (separate each with ',')"
+content:
+    type: "textarea"
+    default: %CONTENT_ARTICLE%
+    displayName: "Article (in markdown)"
+    default: ""
+    attributes:
+        rows: 10
+        cols: 10
+        inside: true
+    rules:
+        required:
+            - error
+            - "Article content is required"
+preview:
+    type: "button"
+    displayName: "Preview content"
+mySubmit:
+    type: "submit"
+    displayName: "Submit article"

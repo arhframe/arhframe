@@ -1,18 +1,51 @@
-defaultpost:
-  pattern: "/"
-  controller: "test"
-  action: "indexPost"
-  method: "post"
-defaultiphone:
-  pattern: "/"
-  controller: "test"
-  action: "indexIPhone"
-  type: "Mobile"
-title:
-  pattern: "/default-{title}-{slug}"
-  controller: "test"
+listArticle:
+  pattern: "/blog"
+  controller: "blogmd"
   action: "index"
-default:
-  pattern: "/"
-  controller: "test"
-  action: "index"
+article:
+  pattern: "/blog-{slug}"
+  controller: "blogmd"
+  action: "article"
+listarticle:
+  pattern: "/admin/blogmd"
+  controller: "blogmdAdmin"
+  action: "listArticle"
+addarticleview:
+  pattern: "/admin/blogmd/addArticle"
+  controller: "blogmdAdmin"
+  action: "viewCreateArticle"
+addarticle:
+  pattern: "/admin/blogmd/addArticle"
+  controller: "blogmdAdmin"
+  action: "createArticle"
+  method: "POST"
+addimageview:
+  pattern: "/admin/blogmd/image"
+  controller: "blogmdAdmin"
+  action: "viewCreateImage"
+addimage:
+  pattern: "/admin/blogmd/image"
+  controller: "blogmdAdmin"
+  action: "createImage"
+  method: "POST"
+deleteimage:
+  pattern: "/admin/blogmd/image/delete"
+  controller: "blogmdAdmin"
+  action: "deleteImage"
+updatearticleview:
+  pattern: "/admin/blogmd/updateArticle/{slug}"
+  controller: "blogmdAdmin"
+  action: "viewUpdateArticle"
+updatearticle:
+  pattern: "/admin/blogmd/updateArticle/{slug}"
+  controller: "blogmdAdmin"
+  action: "updateArticle"
+  method: "POST"
+deletearticle:
+  pattern: "/admin/blogmd/deleteArticle/{slug}"
+  controller: "blogmdAdmin"
+  action: "deleteArticle"
+webdav:
+  pattern: "/blogmd/webdav"
+  controller: "@af_webdav"
+  path: 'module/blogmd/resources/markdown'

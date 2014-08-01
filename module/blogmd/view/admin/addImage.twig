@@ -1,0 +1,126 @@
+{% extends "admin/layout.twig" %}
+{% block body %}
+    <h1>Upload image</h1>
+    <hr/>
+    {% if error is defined %}
+        <span class="label label-warning">{{ error }}</span>
+    {% endif %}
+    {% if success is defined %}
+        <span class="label label-success">{{ success }}</span>
+    {% endif %}
+
+    {{ getForm('addImage', 'addimage') }}
+    <h1>List Images</h1>
+    <hr/>
+    <table id="MyGrid" class="table table-bordered datagrid">
+        <thead>
+        <tr>
+            <th>
+                <span class="datagrid-header-title"></span>
+
+                <div class="datagrid-header-left">
+                    <div class="input-append search datagrid-search">
+                        <input type="text" class="input-medium" placeholder="Search">
+                        <button type="button" class="btn"><i class="icon-search"></i></button>
+                    </div>
+                </div>
+
+            </th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>
+
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+    <script>
+        $(function () {
+            var DataSource = function (options) {
+                this._formatter = options.formatter;
+                this._columns = options.columns;
+                this._data = options.data;
+                this._delay = options.delay || 0;
+            };
+
+            DataSource.prototype = {
+
+                columns: function () {
+                    return this._columns;
+                },
+
+                data: function (options, callback) {
+
+                    var self = this;
+
+
+                    var data = $.extend(true, [], self._data);
+
+
+                    // SEARCHING
+                    if (options.search) {
+                        data = _.filter(data, function (item) {
+                            for (var prop in item) {
+                                if (!item.hasOwnProperty(prop)) continue;
+                                if (~item[prop].toString().toLowerCase().indexOf(options.search.toLowerCase())) return true;
+                            }
+                            return false;
+                        });
+                    }
+                    var count = data.length;
+                    console.log(count);
+                    // SORTING
+                    if (options.sortProperty) {
+                        data = _.sortBy(data, options.sortProperty);
+                        if (options.sortDirection === 'desc') data.reverse();
+                    }
+
+
+                    if (self._formatter) self._formatter(data);
+
+                    callback({ data: data, start: 0, end: data.length, count: count});
+
+                }
+            };
+
+// INITIALIZING THE DATAGRID
+            var dataSource = new DataSource({
+                columns: [
+                    {
+                        property: 'image',
+                        label: 'Image',
+                        sortable: false
+                    },
+                  
+                    {
+                        property: 'url',
+                        label: 'Url',
+                        sortable: true
+                    },
+                    {
+                        property: 'control',
+                        label: 'Control',
+                        sortable: false
+                    }
+                ],
+                data: [
+                    {% for image in images %}
+                    {
+                        image: '<a href="{{ getResource(image) }}">{{ getResourceHtml(image).resize(100) }}</a>',
+                        url: '{{ getResource(image) }}',
+                        control: '<a href="{{ getRoute('deleteimage') }}?image={{ image }}" onclick="return confirm(\'Are you sure?\');" class="btn btn-danger btn-s" style="margin-left: 5px;">Delete</a>'
+                        
+                    },
+                    {% endfor %}
+                ]
+            });
+
+            $('#MyGrid').datagrid({
+                dataSource: dataSource
+            });
+
+        });
+    </script>
+{% endblock %}

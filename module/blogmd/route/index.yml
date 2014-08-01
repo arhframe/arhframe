@@ -1,4 +1,0 @@
-default:
-  pattern: "/"
-  controller: "test"
-  action: "index"

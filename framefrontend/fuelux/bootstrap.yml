@@ -8,7 +8,8 @@ less:
     "less/fuelux-responsive.less":
         responsive: true
 needle:
-    0: jquery.js
+    0: "http://code.jquery.com/jquery-1.8.0.min.js"
+    1: "http://underscorejs.org/underscore-min.js"
     "http://html5shim.googlecode.com/svn/trunk/html5.js":
         conditional: "<!--[if lt IE 9]>%s<![endif]-->"
-    1: "http://fuelcdn.com/fuelux-imh/2.2/loader.min.js"
+    2: "http://fuelcdn.com/fuelux-imh/2.2/loader.min.js"

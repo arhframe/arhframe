@@ -11,7 +11,14 @@ class VarDumpCollector extends DebugBar\DataCollector\DataCollector implements D
     public function addVarDump(VarDump $varDump)
     {
         $this->count++;
-        $this->arrayValue = array_merge_recursive_distinct($this->arrayValue, $varDump->getOutput());
+        $key = key($varDump->getOutput());
+        $value = current($varDump->getOutput());
+        if(!empty($this->arrayValue[$key])){
+            $this->arrayValue[$key] .= "\n". $value;
+        }else{
+            $this->arrayValue = array_merge($this->arrayValue, $varDump->getOutput());
+        }
+        
     }
     public function collect()
     {

@@ -1,0 +1,11 @@
+{% if tags is defined %}
+    <div>
+        <h3>Tags:</h3>
+        <ul class="tags">
+            {% for tag in tags %}
+                <li><a href="#">{{ tag }}</a></li>
+            {% endfor %}
+            <div style="clear: both;"></div>
+        </ul>
+    </div>
+{% endif %}

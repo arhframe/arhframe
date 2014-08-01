@@ -1,0 +1,44 @@
+{% extends "admin/layout.twig" %}
+{% block body %}
+    {% if article is defined %}
+        <h1>Update article '{{ article.title }}'</h1>
+    {% else %}
+        <h1>Add an article</h1>
+    {% endif %}
+
+    <hr/>
+    {% if error is defined %}
+        <span class="label label-warning">{{ error }}</span>
+    {% endif %}
+    {% if success is defined %}
+        <span class="label label-success">{{ success }}</span>
+    {% endif %}
+    {% if article is defined %}
+        {{ getForm('updateArticle').uncache() }}
+    {% else %}
+        {{ getForm('addArticle') }}
+    {% endif %}
+
+    <fieldset id="previewArea" style="display: none;">
+        <legend>Preview</legend>
+        <div style="padding: 15px;"></div>
+    </fieldset>
+    <script type="text/javascript">
+        $(function () {
+            $('#preview').click(function () {
+                console.log($('#content').val());
+                $.ajax({
+                    type: "GET",
+                    async: false,
+                    url: "http://converter.arthurh.fr/index.php/api",
+                    data: { src: "md", to: "html", content: $('#content').val() }
+                }).done(function (msg) {
+                    console.log(msg);
+                    $('#previewArea div').html(msg);
+                    $('#previewArea').show(400);
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

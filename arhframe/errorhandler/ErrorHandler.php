@@ -9,17 +9,14 @@ function errorHandler($debug=null){
 }
 class ErrorHandler
 {
-
     public function __construct($debug=null)
     {
     	$config = null;
     	if(empty($debug)){
     		$config = Config::getInstance();
     		if (!$config->config->debug && !$config->config->devmode) {
-    			if (!$config->config->debug) {
-    				error_reporting(0);
-    			}
-    		
+				error_reporting(0);
+
     			return;
     		}
     	}
@@ -38,7 +35,7 @@ class ErrorHandler
             $renderer = ucfirst($handler).'ErrorHandler';
         }
         if (!empty($renderer) && class_exists($renderer)) {
-            return new $renderer($option);
+            return $renderer::getInstance($option);
         } else {
             throw new ArhframeException("Error handler '". $handler ."' does not exist.");
 

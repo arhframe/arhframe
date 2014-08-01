@@ -1,0 +1,25 @@
+<div class="articles">
+    <h1>Articles</h1>
+    <br/>
+    <ul>
+        {% for article in articles %}
+            <li onclick="window.location.href='{{ getRoute('article', article.slug) }}'">
+                <div class="tags">
+                    {% for tag in article.tags %}
+                        <span>{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {{ getResourceHtml(article.logo).scale(150).crop(0, 100) }}
+                <h1>{{ article.title }}</h1>
+                <hr/>
+                <div class="date">{{ article.date }}</div>
+                <p>
+                    {{ article.shortContent }}
+                </p>
+
+            </li>
+
+        {% endfor %}
+        <div style="clear: both;"></div>
+    </ul>
+</div>

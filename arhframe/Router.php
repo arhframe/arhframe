@@ -32,6 +32,7 @@ Class Router
     private $validation;
     private $static;
     private $redirect = null;
+    private $dataExtract;
 
     /**
      *
@@ -204,18 +205,21 @@ Class Router
                 $this->module = $value['module'];
                 $this->static = $value['static'];
                 $this->redirect = $value['redirect'];
-
+                $this->dataExtract = $value;
             }
         }
-        if(!empty($this->redirect)){
+        if (!empty($this->redirect)) {
 
             $this->redirect();
         }
     }
-    private function redirect(){
-        header('Location: '. $this->redirect);
+
+    private function redirect()
+    {
+        header('Location: ' . $this->redirect);
         exit();
     }
+
     /**
      * @return bool
      */
@@ -328,11 +332,15 @@ Class Router
      */
     public static function writeRoute($pattern)
     {
+
         if (Router::isRewrite()) {
             return SERVERNAME . $pattern;
         }
-
-        return SERVERNAME . '/' . Config::getInstance()->config->pagerouter . '/' . $pattern;
+        $pagerouter = Config::getInstance()->config->pagerouter;
+        if (!empty($pagerouter)) {
+            $pagerouter .= '/';
+        }
+        return SERVERNAME . '/' . $pagerouter . $pattern;
 
     }
 
@@ -362,18 +370,53 @@ Class Router
         return $pattern;
     }
 
+    public function getArhframeController()
+    {
+        preg_match('#^@af_(.*)#', $this->controller, $output);
+        return $output[1];
+    }
+
+    public function isArhframeController()
+    {
+        return preg_match('#^@af_(.*)#', $this->controller);
+    }
+
     /**
      * @return string
      */
     public function __toString()
     {
-        return "Route path: " . $this->getCurrentRoute()
-        . "\nRoute name: " . $this->getNameRoute()
-        . "\nRoute controller: " . $this->getController()
-        . "\nRoute module: " . $this->getController()
-        . "\nRoute action: " . $this->getAction()
-        . "\nRoute method: " . $this->getMethod()
-        . "\nRoute is static: " . ($this->static ? 'true' : 'false')
-        . "\nDevice: " . $this->type;
+        $toString = "Route path: " . $this->getCurrentRoute()
+            . "\nRoute name: " . $this->getNameRoute();
+        if ($this->isArhframeController()) {
+            foreach ($this->dataExtract as $key => $value) {
+                $toString .= "\nRoute " . $key . ": " . $value;
+            }
+        } else {
+            $toString .= "\nRoute controller: " . $this->getController()
+                . "\nRoute module: " . $this->getController()
+                . "\nRoute action: " . $this->getAction()
+                . "\nRoute method: " . $this->getMethod()
+                . "\nRoute is static: " . ($this->static ? 'true' : 'false')
+                . "\nDevice: " . $this->type;
+        }
+        return $toString;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDataExtract()
+    {
+        return $this->dataExtract;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPattern()
+    {
+        return $this->pattern;
+    }
+
 }

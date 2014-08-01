@@ -3,9 +3,9 @@
 /**
  *  Class for button controls.
  *
- *  @author     Stefan Gabos <contact@stefangabos.ro>
- *  @copyright  (c) 2006 - 2013 Stefan Gabos
- *  @package    Controls
+ * @author     Stefan Gabos <contact@stefangabos.ro>
+ * @copyright  (c) 2006 - 2013 Stefan Gabos
+ * @package    Controls
  */
 class Zebra_Form_Button extends Zebra_Form_Control
 {
@@ -33,7 +33,7 @@ class Zebra_Form_Button extends Zebra_Form_Control
      *  $form->render();
      *  </code>
      *
-     *  @param  string  $id             Unique name to identify the control in the form.
+     * @param  string $id Unique name to identify the control in the form.
      *
      *                                  The control's <b>name</b> attribute will be the same as the <b>id</b> attribute!
      *
@@ -49,9 +49,9 @@ class Zebra_Form_Button extends Zebra_Form_Control
      *                                  echo $my_button;
      *                                  </code>
      *
-     *  @param  string  $caption        Caption of the button control.
+     * @param  string $caption Caption of the button control.
      *
-     *  @param  array   $attributes     (Optional) An array of attributes valid for
+     * @param  array $attributes (Optional) An array of attributes valid for
      *                                  {@link http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.4 input}
      *                                  controls (size, readonly, style, etc)
      *
@@ -75,7 +75,7 @@ class Zebra_Form_Button extends Zebra_Form_Control
      *                                  should not be altered manually:<br>
      *                                  <b>type</b>, <b>id</b>, <b>name</b>, <b>value</b>, <b>class</b>
      *
-     *  @return void
+     * @return void
      */
     public function Zebra_Form_Button($id, $caption, $attributes = '')
     {
@@ -98,11 +98,11 @@ class Zebra_Form_Button extends Zebra_Form_Control
         $this->set_attributes(
 
             array(
-                'type'  =>  'submit',
-                'name'  =>  $id,
-                'id'    =>  $id,
-                'value' =>  $caption,
-                'class' =>  'button',
+                'type' => 'button',
+                'name' => $id,
+                'id' => $id,
+                'value' => $caption,
+                'class' => 'button',
             )
 
         );
@@ -128,7 +128,7 @@ class Zebra_Form_Button extends Zebra_Form_Control
      *
      *  <i>This method is automatically called by the {@link Zebra_Form::render() render()} method!</i>
      *
-     *  @return string  The control's HTML code
+     * @return string  The control's HTML code
      */
     public function toHTML()
     {

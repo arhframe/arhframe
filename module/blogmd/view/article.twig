@@ -1,0 +1,11 @@
+{% if article is not defined %}
+    <h1>Article not found</h1>
+{% else %}
+    <div class="article">
+        <div class="logo">{{ getResourceHtml(article.logo).resize(500) }}</div>
+        <h1>{{ article.title }}</h1>
+        <hr/>
+        <div class="date">{{ article.date }}</div>
+        <p>{{ article.content }}</p>
+    </div>
+{% endif %}

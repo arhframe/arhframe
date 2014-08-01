@@ -1,7 +1,7 @@
 <?php
 package('arhframe');
 /**
-* 
+*
 */
 class Response
 {
@@ -49,10 +49,10 @@ class Response
 	const HTTP_UNPROCESSABLE_ENTITY = 422;
 	const HTTP_LOCKED = 423;
 	const HTTP_FAILED_DEPENDENCY = 424;
-	const HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL = 425; 
+	const HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL = 425;
 	const HTTP_UPGRADE_REQUIRED = 426;
-	const HTTP_PRECONDITION_REQUIRED = 428; 
-	const HTTP_TOO_MANY_REQUESTS = 429; 
+	const HTTP_PRECONDITION_REQUIRED = 428;
+	const HTTP_TOO_MANY_REQUESTS = 429;
 	const HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431;
 	const HTTP_INTERNAL_SERVER_ERROR = 500;
 	const HTTP_NOT_IMPLEMENTED = 501;
@@ -65,7 +65,7 @@ class Response
 	const HTTP_LOOP_DETECTED = 508;
 	const HTTP_NOT_EXTENDED = 510;
 	const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;
-	
+
 	public static $statusTexts = array(
 			100 => 'Continue',
 			101 => 'Switching Protocols',
@@ -128,7 +128,7 @@ class Response
 			510 => 'Not Extended',
 			511 => 'Network Authentication Required'
 	);
-	
+
 	private $content;
 	private $cacheControl = 'Cache-Control: ';
 	private $cacheControlArg = array();
@@ -141,7 +141,7 @@ class Response
 	const PUBLICCACHE = 'public';
 	function __construct($content=null, $statusCode = 200){
 		$this->content = $content;
-		
+
 		$this->setStatusCode($statusCode);
 		$this->protocoleVersion = '1.0';
 		$this->request = BeanLoader::getInstance()->getBean('arhframe.request');
@@ -199,28 +199,28 @@ class Response
 	public function setResponseCode($code){
 		http_response_code($code);
 	}
-	
+
 	public function setStatusCode($statusCode){
 		$this->statusCode = $statusCode;
 		$this->statusCode = (int) $statusCode;
 		if ($this->statusCode < 100 || $this->statusCode >= 600) {
 			throw new ArhframeException(sprintf('The HTTP status code "%s" is not valid.', $this->statusCode));
 		}
-		
+
 		if (null === $text) {
 			$this->statusText = isset(self::$statusTexts[$statusCode]) ? self::$statusTexts[$statusCode] : '';
-		
+
 			return $this;
 		}
-		
+
 		if (false === $text) {
 			$this->statusText = '';
-		
+
 			return $this;
 		}
-		
+
 		$this->statusText = $text;
-		
+
 		return $this;
 	}
 	public function getStatusCode(){
@@ -234,7 +234,7 @@ class Response
 	}
 	public function createHeader(){
 		$this->addHeader(sprintf('HTTP/%s %s %s', $this->protocoleVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
-		
+
 		$nbCacheControlArg = count($this->cacheControlArg);
 		if($nbCacheControlArg == 0){
 			return;
@@ -303,7 +303,7 @@ class Response
 		} catch (ArhframeException $e) {
 			throw new ArhframeException("cache control max age problem ". $e->getMessage());
 		}
-		
+
 		$this->addArgCacheControl('max-age', 'max-age='. $age, $remove);
 	}
 	public function setMaxStale($age, $remove=false){
@@ -331,7 +331,7 @@ class Response
 	public function setOnlyIfCached($remove=false){
 		$this->addArgCacheControl('only-if-cached', 'only-if-cached', $remove);
 	}
-	
+
 	public function setMinFresh($age, $remove=false){
 		try {
 			$age = $this->formatAge($age);
@@ -363,5 +363,5 @@ class Response
 		$this->protocoleVersion = $protocoleVersion;
 		return $this;
 	}
-	
+
 }

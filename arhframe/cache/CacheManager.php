@@ -13,7 +13,7 @@ import('arhframe.Router');
  * @param boolean $module use module to create the cache key
  * @return CacheManager
  */
-function cache($prefix, $route=true, $module=false)
+function cache($prefix, $route = true, $module = false)
 {
     $cacheManager = CacheManager::getInstance();
     if (is_object($prefix)) {
@@ -23,13 +23,13 @@ function cache($prefix, $route=true, $module=false)
     }
     if ($route && $module) {
         $router = Router::getInstance();
-        $prefix = $router->getModule() .'/'. $router->getNameRoute() .'.'. $prefix;
+        $prefix = $router->getModule() . $_SERVER['PATH_INFO'] . '.' . $prefix;
     } elseif ($module) {
         $router = Router::getInstance();
-        $prefix = $router->getModule() .'/'. $prefix;
+        $prefix = $router->getModule() . '/' . $prefix;
     } elseif ($route) {
         $router = Router::getInstance();
-        $prefix = $router->getNameRoute() .'/'. $prefix;
+        $prefix = $router->getNameRoute() . '/' . $prefix;
     }
     $cacheManager->setPrefix($prefix);
 
@@ -44,9 +44,10 @@ function clearCache()
     $cacheManager = CacheManager::getInstance();
     $cacheManager->clear();
 }
+
 /**
-*
-*/
+ *
+ */
 
 /**
  * The cache manager
@@ -87,18 +88,18 @@ class CacheManager
         if (empty($this->cacheConfig['folder'])) {
             throw new ArhframeException("You must specified cache folder.");
         }
-        $folder = dirname(__FILE__) .'/../..'. $this->cacheConfig['folder'];
+        $folder = dirname(__FILE__) . '/../..' . $this->cacheConfig['folder'];
         if (!is_dir($folder)) {
-            throw new ArhframeException('Cache folder "'. $this->cacheConfig['folder'] .'" doesn\'t exist.');
+            throw new ArhframeException('Cache folder "' . $this->cacheConfig['folder'] . '" doesn\'t exist.');
         }
         $this->folder = new Folder($folder);
         if (empty($this->cacheConfig) || empty($type) || Config::getInstance()->config->devmode) {
             return;
         }
-        if (!empty($this->cacheConfig['lifetime']) && (int) $this->cacheConfig['lifetime'] >0) {
-            $this->expiration = (int) $this->cacheConfig['lifetime'];
+        if (!empty($this->cacheConfig['lifetime']) && (int)$this->cacheConfig['lifetime'] > 0) {
+            $this->expiration = (int)$this->cacheConfig['lifetime'];
         }
-        
+
         $this->folderName = $this->cacheConfig['folder'];
         switch (strtolower(trim($this->cacheConfig['type']))) {
             case 'memcache':
@@ -117,22 +118,25 @@ class CacheManager
                 $this->typeCache = 'apc';
                 break;
             default:
-                throw new ArhframeException('Cache "'. $this->cacheConfig['type'] .'" not supported.');
+                throw new ArhframeException('Cache "' . $this->cacheConfig['type'] . '" not supported.');
         }
     }
+
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
-        self::$_instance = new CacheManager();
+            self::$_instance = new CacheManager();
         }
 
         return self::$_instance;
     }
+
     private function constructFilecache()
     {
-        $this->cache = eden('cache', (string) $this->folder->absolute());
+        $this->cache = eden('cache', (string)$this->folder->absolute());
         $this->typeCache = 'file';
     }
+
     private function constructMemcache()
     {
         $servers = $this->cacheConfig['server'];
@@ -144,7 +148,7 @@ class CacheManager
         if (empty($currentServer['port'])) {
             $port = '11211';
         } else {
-            $port = (int) $currentServer['port'];
+            $port = (int)$currentServer['port'];
         }
         try {
             $this->verifyConnection($currentServerName, $port);
@@ -163,26 +167,28 @@ class CacheManager
             } catch (Exception $e) {
                 throw new ArhframeException($e->getMessage());
             }
-            $this->cache->addServer($serverName, (int) $server['port'], (boolean) $server['persistent'], (int) $server['cost']);
+            $this->cache->addServer($serverName, (int)$server['port'], (boolean)$server['persistent'], (int)$server['cost']);
         }
 
     }
+
     private function verifyConnection($serverName, $port)
     {
-        if (!isPortOpen($serverName, (int) $port)) {
-            throw new ArhframeException("Can't connect to memcache server \"". $serverName .'".');
+        if (!isPortOpen($serverName, (int)$port)) {
+            throw new ArhframeException("Can't connect to memcache server \"" . $serverName . '".');
         }
     }
+
     private function verifyServerInfo($server, $serverName)
     {
         if (empty($server['port'])) {
-            throw new ArhframeException("You must specified a port for memcache server \"". $serverName .'".');
+            throw new ArhframeException("You must specified a port for memcache server \"" . $serverName . '".');
         }
         if (empty($server['cost'])) {
-            throw new ArhframeException('You must specified a cost for memcache server "'. $serverName .'".');
+            throw new ArhframeException('You must specified a cost for memcache server "' . $serverName . '".');
         }
         if (empty($server['persistent'])) {
-            throw new ArhframeException('You must specified a persistent for memcache server "'. $serverName .'".');
+            throw new ArhframeException('You must specified a persistent for memcache server "' . $serverName . '".');
         }
         try {
             $this->verifyConnection($serverName, $server['port']);
@@ -190,14 +196,17 @@ class CacheManager
             throw new ArhframeException($e->getMessage());
         }
     }
+
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
     }
+
     public function getPrefix()
     {
         return $this->prefix;
     }
+
     public function clear()
     {
         if ($this->typeCache != 'file' && !empty($this->typeCache)) {
@@ -205,13 +214,15 @@ class CacheManager
         }
         $this->folder->clear();
     }
+
     private function getKeyFormat($key)
     {
-        return $this->prefix .'/'. $key;
+        return $this->prefix . '/' . $key;
     }
+
     private function getKeyFormatFile($key)
     {
-        $key = $this->prefix .'/'. $key;
+        $key = $this->prefix . '/' . $key;
         $explodeKey = explode('/', $key);
         if (empty($explodeKey)) {
             return $key;
@@ -222,7 +233,8 @@ class CacheManager
 
         return implode('/', $explodeKey);
     }
-    public function set($key, $data, $expire=null)
+
+    public function set($key, $data, $expire = null)
     {
         if (empty($this->typeCache)) {
             return;
@@ -236,21 +248,22 @@ class CacheManager
         if ($this->typeCache == 'apc' || $this->typeCache == 'xcache') {
             return $this->cache->set($this->getKeyFormat($key), $data, $expire);
         } elseif ($this->typeCache == 'file') {
-            $file = new File((string) $this->folder->absolute() .'/'. $this->getKeyFormatFile($key) .'.phpc');
+            $file = new File((string)$this->folder->absolute() . '/' . $this->getKeyFormatFile($key) . '.phpc');
             if (!is_dir($file->getFolder())) {
-            	try {
-            		mkdir($file->getFolder(), 0777, true);
-            	} catch (Exception $e) {
-            		throw new Exception($file->getFolder());
-            	}
-                
+                try {
+                    mkdir($file->getFolder(), 0777, true);
+                } catch (Exception $e) {
+                    throw new Exception($file->getFolder());
+                }
+
             }
 
-            return $this->cache->set($this->getKeyFormat($key), $this->getKeyFormatFile($key) .'.'. $file->getExtension(), serialize($data));
+            return $this->cache->set($this->getKeyFormat($key), $this->getKeyFormatFile($key) . '.' . $file->getExtension(), serialize($data));
         } else {
             return $this->cache->set($this->getKeyFormat($key), $data, null, $expire);
         }
     }
+
     public function remove($key)
     {
         if (empty($this->typeCache)) {
@@ -258,13 +271,14 @@ class CacheManager
         }
         $this->cache->remove($this->getKeyFormat($key));
     }
+
     public function get($key)
     {
         if (empty($this->typeCache)) {
             return null;
         }
         if ($this->typeCache == 'file') {
-            if (!empty($this->expiration) && (time()-$this->cache->getCreated($key))>=$this->expiration) {
+            if (!empty($this->expiration) && (time() - $this->cache->getCreated($key)) >= $this->expiration) {
                 $this->remove($key);
 
                 return null;
@@ -283,20 +297,41 @@ class CacheManager
 
         return $data;
     }
+
     public function getCacheFolder()
     {
 
         return $this->folder->absolute();
     }
+
     public function getCacheFolderName()
     {
         return $this->folderName;
     }
+
     public function isCacheActive()
     {
         return !empty($this->typeCache);
     }
+
     public function getCacheObject()
     {
     }
+
+    /**
+     * @return int|null
+     */
+    public function getExpiration()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @param int|null $expiration
+     */
+    public function setExpiration($expiration)
+    {
+        $this->expiration = $expiration;
+    }
+
 }
